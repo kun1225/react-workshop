@@ -4,48 +4,22 @@ import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
 import { toast } from 'sonner';
 
-const initialFormData = {
-  name: '',
-  phone: '',
-  email: '',
-  eventName: '',
-  people: '',
-  note: '',
-};
-
 export default function Page() {
-  const [formData, setFormData] = useState(initialFormData);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (formData) => {
+    // 使用 formData 來抓取資料
+    const data = Object.fromEntries(formData);
     toast.success(
       <pre className="p-4 bg-muted rounded-md">
-        {JSON.stringify(formData, null, 2)}
+        {JSON.stringify(data, null, 2)}
       </pre>,
     );
-  };
-
-  const resetForm = () => {
-    setFormData(initialFormData);
   };
 
   return (
@@ -61,19 +35,16 @@ export default function Page() {
           <CardTitle>活動報名表單</CardTitle>
         </CardHeader>
         <CardContent>
-          <form
-            onSubmit={handleSubmit}
-            className="space-y-6"
-          >
+          {/* 將函數傳給 function */}
+          <form action={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name">姓名</Label>
                 <Input
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   placeholder="請輸入姓名"
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -81,8 +52,6 @@ export default function Page() {
                 <Input
                   id="phone"
                   name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
                   placeholder="請輸入電話"
                 />
               </div>
@@ -93,8 +62,6 @@ export default function Page() {
                 id="email"
                 name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleChange}
                 placeholder="請輸入電子郵件"
               />
             </div>
@@ -103,8 +70,6 @@ export default function Page() {
               <Input
                 id="eventName"
                 name="eventName"
-                value={formData.eventName}
-                onChange={handleChange}
                 placeholder="請輸入活動名稱"
               />
             </div>
@@ -113,8 +78,6 @@ export default function Page() {
               <Input
                 id="people"
                 name="people"
-                value={formData.people}
-                onChange={handleChange}
                 placeholder="請輸入參加人數"
               />
             </div>
@@ -123,33 +86,16 @@ export default function Page() {
               <Input
                 id="note"
                 name="note"
-                value={formData.note}
-                onChange={handleChange}
                 placeholder="如有特殊需求請填寫"
               />
             </div>
             <div className="flex justify-end pt-2 space-x-2">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={resetForm}
-              >
+              <Button type="reset" variant="outline">
                 重設表單
               </Button>
               <Button type="submit">送出</Button>
             </div>
           </form>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>目前表單資料</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <pre className="p-4 bg-muted rounded-md overflow-x-auto">
-            {JSON.stringify(formData, null, 2)}
-          </pre>
         </CardContent>
       </Card>
     </div>

@@ -1,7 +1,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
@@ -12,13 +17,21 @@ export default function Page() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
-  const [event, setEvent] = useState('');
+  const [eventName, setEventName] = useState('');
   const [people, setPeople] = useState('');
   const [note, setNote] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success('申請已送出！');
+    toast.success(
+      <pre className="p-4 bg-muted rounded-md">
+        {JSON.stringify(
+          { name, phone, email, eventName, people, note },
+          null,
+          2,
+        )}
+      </pre>,
+    );
   };
 
   // 重置表單的內容也越來越長
@@ -26,19 +39,17 @@ export default function Page() {
     setName('');
     setPhone('');
     setEmail('');
-    setEvent('');
+    setEventName('');
     setPeople('');
     setNote('');
   };
 
-  const isFormValid = [name, phone, email, event, people, note].every(
-    (value) => value.trim() !== '',
-  );
-
   return (
     <div className="w-2xl mx-auto space-y-8">
       <header className="text-center">
-        <h1 className="text-3xl font-bold">處理表單輸入 錯誤示範 2</h1>
+        <h1 className="text-3xl font-bold">
+          處理表單輸入 錯誤示範 2
+        </h1>
       </header>
 
       <Card>
@@ -46,7 +57,10 @@ export default function Page() {
           <CardTitle>活動報名表單</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name">姓名</Label>
@@ -59,10 +73,10 @@ export default function Page() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="studentId">電話</Label>
+                <Label htmlFor="phone">電話</Label>
                 <Input
-                  id="studentId"
-                  name="studentId"
+                  id="phone"
+                  name="phone"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="請輸入電話"
@@ -87,8 +101,10 @@ export default function Page() {
               <Input
                 id="book"
                 name="book"
-                value={event}
-                onChange={(e) => setEvent(e.target.value)}
+                value={eventName}
+                onChange={(e) =>
+                  setEventName(e.target.value)
+                }
                 placeholder="請輸入活動名稱"
               />
             </div>
@@ -116,12 +132,14 @@ export default function Page() {
             </div>
 
             <div className="flex justify-end pt-2 space-x-2">
-              <Button type="button" variant="outline" onClick={resetForm}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={resetForm}
+              >
                 重設表單
               </Button>
-              <Button type="submit" disabled={!isFormValid}>
-                送出
-              </Button>
+              <Button type="submit">送出</Button>
             </div>
           </form>
         </CardContent>
@@ -133,7 +151,18 @@ export default function Page() {
         </CardHeader>
         <CardContent>
           <pre className="p-4 bg-muted rounded-md overflow-x-auto">
-            {JSON.stringify({ name, phone, email, event, people, note }, null, 2)}
+            {JSON.stringify(
+              {
+                name,
+                phone,
+                email,
+                eventName,
+                people,
+                note,
+              },
+              null,
+              2,
+            )}
           </pre>
         </CardContent>
       </Card>

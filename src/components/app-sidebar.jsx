@@ -25,9 +25,14 @@ const chapters = [
         label: 'Ch 2-2: 如何正確管理 State',
         icon: Book,
         pages: [
-          { label: '錯誤示範 1', href: '/ch-2/form-data-error-1', icon: FileText },
-          { label: '錯誤示範 2', href: '/ch-2/form-data-error-2', icon: FileText },
-          { label: '更好的寫法', href: '/ch-2/form-data-better', icon: FileText },
+          {
+            label: 'Form 表單 錯誤示範',
+            href: '/ch-2/form-data-error-1',
+            icon: FileText,
+          },
+          { label: 'Form 表單 錯誤示範 2', href: '/ch-2/form-data-error-2', icon: FileText },
+          { label: 'Form 表單 更好的寫法', href: '/ch-2/form-data-better', icon: FileText },
+          { label: 'Form 表單 - action', href: '/ch-2/form-without-state', icon: FileText },
         ],
       },
     ],

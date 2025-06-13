@@ -158,6 +158,6 @@
     @apply bg-background text-foreground;
   }
   button {
-    @apply cursor-pointer;
+    @apply cursor-pointer select-none;
   }
 }
