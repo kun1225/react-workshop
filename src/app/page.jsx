@@ -1,36 +1,20 @@
 import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
   return (
-    <nav className="container mx-auto py-32">
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/react-compiler">react-compiler</Link>
-        </li>
-        <li>
-          <Link href="/use-transition">use-transition</Link>
-        </li>
-        <li>
-          <Link href="/use-deferred-value">use-deferred-value</Link>
-        </li>
-      </ul>
-
-      <p className="mt-8">Reels</p>
-      <ul>
-        <li>
-          <Link href="/reels/use-memo">use-memo</Link>
-        </li>
-      </ul>
-
-      <p className="mt-8">Test</p>
-      <ul>
-        <li>
-          <Link href="/test/combine-context">combine-context</Link>
-        </li>
-      </ul>
-    </nav>
+    <div className="mx-auto  w-2xl h-svh p-8">
+      <Card>
+        <CardHeader>Chapter 2</CardHeader>
+        <CardContent>
+          <nav className="flex flex-col gap-2">
+            <Button asChild variant="link">
+              <Link href="/ch-2/form-data-error-1">form-data-error</Link>
+            </Button>
+          </nav>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
