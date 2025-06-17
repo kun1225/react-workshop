@@ -6,6 +6,7 @@ import {
   SidebarGroupContent,
   SidebarMenuButton,
   SidebarHeader,
+  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import {
   Accordion,
@@ -62,6 +63,22 @@ const chapters = [
           },
         ],
       },
+      {
+        label: 'Ch 2-3: 如何正確使用 Effect',
+        icon: Book,
+        pages: [
+          {
+            label: 'Effect 錯誤示範',
+            icon: FileText,
+            href: '/ch-2/effect-toast-error',
+          },
+          {
+            label: 'Effect 較好寫法',
+            icon: FileText,
+            href: '/ch-2/effect-toast-better',
+          },
+        ],
+      },
     ],
   },
 ];
@@ -69,8 +86,9 @@ const chapters = [
 export function AppSidebar() {
   return (
     <Sidebar variant="inset">
-      <SidebarHeader>
+      <SidebarHeader className="flex flex-row items-center justify-between">
         <p>React Workshop</p>
+        <SidebarTrigger />
       </SidebarHeader>
 
       <SidebarContent>
@@ -81,7 +99,11 @@ export function AppSidebar() {
         >
           {chapters.map(
             ({ label, icon: Icon, sections }) => (
-              <AccordionItem key={label} value={label}>
+              <AccordionItem
+                key={label}
+                value={label}
+                className="border-none"
+              >
                 <SidebarGroup>
                   <AccordionTrigger>
                     <SidebarChapterLabel
@@ -118,15 +140,15 @@ function SidebarChapterLabel({ label, icon: Icon }) {
 
 function SidebarSections({ sections }) {
   return (
-    <Accordion
-      type="multiple"
-      collapsible="true"
-      defaultValue={sections.map(({ label }) => label)}
-    >
+    <Accordion type="multiple" collapsible="true">
       {sections.map(({ label, icon: Icon, pages }) => (
-        <AccordionItem value={label} key={label}>
+        <AccordionItem
+          value={label}
+          key={label}
+          className="border-none"
+        >
           <SidebarGroup>
-            <AccordionTrigger>
+            <AccordionTrigger className="h-4">
               <SidebarGroupLabel>
                 <Icon className="mr-2 h-4 w-4" />
                 {label}
