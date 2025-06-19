@@ -11,3 +11,27 @@ export function wait(ms) {
     // do nothing
   }
 }
+
+export function debounce(func, delay) {
+  let timeoutId;
+
+  const debouncedFn = (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+      timeoutId = null;
+    }, delay);
+  };
+
+  debouncedFn.cancel = function () {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
+
+  return debouncedFn;
+}

@@ -68,14 +68,34 @@ const chapters = [
         icon: Book,
         pages: [
           {
-            label: 'Effect 錯誤示範',
+            label: 'Effect Search 錯誤示範',
+            icon: FileText,
+            href: '/ch-2/effect-search-error',
+          },
+          {
+            label: 'Effect Search 更好的寫法',
+            icon: FileText,
+            href: '/ch-2/effect-search-better',
+          },
+          {
+            label: 'Effect Toast 錯誤示範',
             icon: FileText,
             href: '/ch-2/effect-toast-error',
           },
           {
-            label: 'Effect 較好寫法',
+            label: 'Effect Toast 更好的寫法',
             icon: FileText,
             href: '/ch-2/effect-toast-better',
+          },
+          {
+            label: 'Autofocus 錯誤示範',
+            icon: FileText,
+            href: '/ch-2/search-autofocus-error',
+          },
+          {
+            label: 'Autofocus 更好的寫法',
+            icon: FileText,
+            href: '/ch-2/search-autofocus-better',
           },
         ],
       },

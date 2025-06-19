@@ -1,6 +1,6 @@
 import { wait } from '@/lib/utils';
 
-export function SlowComponent({ ms = 600, children }) {
+export function SlowComponent({ ms = 100, children }) {
   wait(ms);
 
   console.log('SlowComponent');
