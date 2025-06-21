@@ -118,6 +118,23 @@ const chapters = [
       },
     ],
   },
+  {
+    label: 'Ch 5: 效能優化',
+    icon: Folder,
+    sections: [
+      {
+        label: 'Ch 5-1: 效能優化',
+        icon: Book,
+        pages: [
+          {
+            label: 'Content Lifting',
+            icon: FileText,
+            href: '/ch-5/content-lifting',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export function AppSidebar() {
