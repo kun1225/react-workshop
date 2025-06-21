@@ -101,6 +101,23 @@ const chapters = [
       },
     ],
   },
+  {
+    label: 'Ch 3: 效能優化',
+    icon: Folder,
+    sections: [
+      {
+        label: 'Ch 3-1: 效能優化',
+        icon: Book,
+        pages: [
+          {
+            label: 'State 設為相同值時不會 re-render',
+            icon: FileText,
+            href: '/ch-3/re-render-with-same-value',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export function AppSidebar() {
