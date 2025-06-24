@@ -123,13 +123,39 @@ const chapters = [
     icon: Folder,
     sections: [
       {
-        label: 'Ch 5-1: 效能優化',
+        label: '狀態下移',
+        icon: Book,
+        pages: [
+          {
+            label: 'State Down Error',
+            icon: FileText,
+            href: '/ch-5/state-down-error',
+          },
+          {
+            label: 'State Down Better',
+            icon: FileText,
+            href: '/ch-5/state-down-better',
+          },
+        ],
+      },
+      {
+        label: '效能優化',
         icon: Book,
         pages: [
           {
             label: 'Content Lifting',
             icon: FileText,
             href: '/ch-5/content-lifting',
+          },
+          {
+            label: 'Context Problem',
+            icon: FileText,
+            href: '/ch-5/context-problem',
+          },
+          {
+            label: 'State Down',
+            icon: FileText,
+            href: '/ch-5/state-down',
           },
         ],
       },
