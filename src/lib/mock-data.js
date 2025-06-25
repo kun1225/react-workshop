@@ -138,3 +138,55 @@ export const recommendedPosts = [
     readTime: '22 分鐘',
   },
 ];
+
+export const analyticsData = [
+  { date: '2024-06-01', visitors: 1200, active: 320 },
+  { date: '2024-06-02', visitors: 1500, active: 400 },
+  { date: '2024-06-03', visitors: 1100, active: 310 },
+  { date: '2024-06-04', visitors: 1800, active: 500 },
+  { date: '2024-06-05', visitors: 1700, active: 480 },
+  { date: '2024-06-06', visitors: 1600, active: 450 },
+  { date: '2024-06-07', visitors: 1750, active: 470 },
+  { date: '2024-06-08', visitors: 1900, active: 520 },
+  { date: '2024-06-09', visitors: 2000, active: 600 },
+  { date: '2024-06-10', visitors: 2100, active: 650 },
+  { date: '2024-06-11', visitors: 1950, active: 610 },
+  { date: '2024-06-12', visitors: 1850, active: 590 },
+  { date: '2024-06-13', visitors: 1700, active: 540 },
+  { date: '2024-06-14', visitors: 1600, active: 500 },
+  { date: '2024-06-15', visitors: 1750, active: 520 },
+  { date: '2024-06-16', visitors: 1800, active: 530 },
+  { date: '2024-06-17', visitors: 1850, active: 540 },
+  { date: '2024-06-18', visitors: 1900, active: 550 },
+  { date: '2024-06-19', visitors: 2000, active: 600 },
+  { date: '2024-06-20', visitors: 2100, active: 650 },
+  { date: '2024-06-21', visitors: 2200, active: 700 },
+  { date: '2024-06-22', visitors: 2150, active: 690 },
+  { date: '2024-06-23', visitors: 2100, active: 670 },
+  { date: '2024-06-24', visitors: 2050, active: 660 },
+  { date: '2024-06-25', visitors: 2000, active: 650 },
+  { date: '2024-06-26', visitors: 1950, active: 640 },
+  { date: '2024-06-27', visitors: 1900, active: 630 },
+  { date: '2024-06-28', visitors: 1850, active: 620 },
+  { date: '2024-06-29', visitors: 1800, active: 610 },
+  { date: '2024-06-30', visitors: 1750, active: 600 },
+];
+
+export const chartData = [
+  {
+    name: 'Chrome',
+    users: 800,
+    fill: 'var(--chart-1)',
+  },
+  {
+    name: 'Safari',
+    users: 600,
+    fill: 'var(--chart-2)',
+  },
+  { name: 'Edge', users: 300, fill: 'var(--chart-3)' },
+  {
+    name: 'Firefox',
+    users: 200,
+    fill: 'var(--chart-4)',
+  },
+];

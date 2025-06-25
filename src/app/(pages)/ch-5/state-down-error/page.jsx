@@ -1,34 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { SlowComponent } from '@/components/slow-component';
-
-// 模擬後台數據
-const user = {
-  name: 'John Doe',
-  email: 'john@vercel.com',
-  role: 'Admin',
-  joined: '2022-01-01',
-};
-
-// 用於 Analytics 的假資料
-const analyticsData = [
-  { date: '2024-06-01', visitors: 1200, active: 320 },
-  { date: '2024-06-02', visitors: 1500, active: 400 },
-  { date: '2024-06-03', visitors: 1100, active: 310 },
-  { date: '2024-06-04', visitors: 1800, active: 500 },
-  { date: '2024-06-05', visitors: 1700, active: 480 },
-];
-
-const analyticsConfig = {
-  visitors: {
-    label: '訪客數',
-    color: 'hsl(var(--chart-1))',
-  },
-  active: {
-    label: '活躍用戶',
-    color: 'hsl(var(--chart-2))',
-  },
-};
+import { wait } from '@/lib/utils';
 
 import {
   ChartContainer,
@@ -37,217 +9,330 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from '@/components/ui/chart';
+import { Button } from '@/components/ui/button';
 import {
-  BarChart,
-  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
+  BarChart,
+  Bar,
+  AreaChart,
+  Area,
 } from 'recharts';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardFooter,
+} from '@/components/ui/card';
+import { analyticsData, chartData } from '@/lib/mock-data';
 
-// 用於 Chart 的假資料
-const chartData = [
-  {
-    name: 'Chrome',
-    users: 800,
-    fill: 'hsl(var(--chart-1))',
-  },
-  {
-    name: 'Safari',
-    users: 600,
-    fill: 'hsl(var(--chart-2))',
-  },
-  { name: 'Edge', users: 300, fill: 'hsl(var(--chart-3))' },
-  {
-    name: 'Firefox',
-    users: 200,
-    fill: 'hsl(var(--chart-4))',
-  },
-];
-
-const chartConfig = {
-  Chrome: { label: 'Chrome', color: 'hsl(var(--chart-1))' },
-  Safari: { label: 'Safari', color: 'hsl(var(--chart-2))' },
-  Edge: { label: 'Edge', color: 'hsl(var(--chart-3))' },
-  Firefox: {
-    label: 'Firefox',
-    color: 'hsl(var(--chart-4))',
-  },
+// 模擬後台數據
+const user = {
+  name: 'This.Web',
+  email: 'example@example.com',
+  role: ' 管理員',
+  joined: '2025-01-01',
 };
 
 function UserDetails({ onHide }) {
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/40">
-      <div className="relative min-w-[320px] rounded-lg bg-white p-6 shadow-lg">
-        <h3 className="mb-2 text-lg font-bold">
-          使用者詳細資料
-        </h3>
-        <ul className="mb-4 text-sm text-gray-700">
-          <li>
-            <b>Email:</b> {user.email}
-          </li>
-          <li>
-            <b>Role:</b> {user.role}
-          </li>
-          <li>
-            <b>Joined:</b> {user.joined}
-          </li>
-        </ul>
-        <button
-          className="rounded bg-gray-200 px-3 py-1 hover:bg-gray-300"
-          onClick={onHide}
+      <Card className="w-xl">
+        <CardHeader>
+          <h3 className="text-lg font-bold">
+            使用者詳細資料
+          </h3>
+        </CardHeader>
+
+        <CardContent>
+          <ul>
+            <li>
+              <b>Email:</b> {user.email}
+            </li>
+            <li>
+              <b>權限:</b> {user.role}
+            </li>
+            <li>
+              <b>加入時間:</b> {user.joined}
+            </li>
+          </ul>
+        </CardContent>
+
+        <CardFooter>
+          <Button
+            className="ml-auto"
+            variant="secondary"
+            onClick={onHide}
+          >
+            關閉
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+const analyticsConfig = {
+  visitors: {
+    label: '訪客數',
+    color: 'var(--chart-2)',
+  },
+  active: {
+    label: '活躍用戶',
+    color: 'var(--chart-5)',
+  },
+};
+
+function AnalyticsComponent({ delay = 0 }) {
+  wait(delay);
+  return (
+    <Card className="grow">
+      <CardHeader>
+        <h3 className="text-xl font-bold">網站流量分析</h3>
+      </CardHeader>
+
+      <CardContent>
+        <ChartContainer
+          config={analyticsConfig}
+          className="bg-card"
         >
-          關閉
-        </button>
-      </div>
-    </div>
+          <LineChart
+            data={analyticsData}
+            width={500}
+            height={300}
+          >
+            <ChartTooltip
+              content={<ChartTooltipContent />}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+
+            <XAxis
+              dataKey="date"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+
+            <Line
+              type="monotone"
+              dataKey="visitors"
+              stroke="var(--chart-2)"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="active"
+              stroke="var(--chart-5)"
+              strokeWidth={2}
+              dot={false}
+            />
+
+            <ChartLegend content={<ChartLegendContent />} />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
 
-function HeavyAnalyticsComponent() {
+const chartConfig = {
+  Chrome: { label: 'Chrome', color: 'var(--chart-1)' },
+  Safari: { label: 'Safari', color: 'var(--chart-2)' },
+  Edge: { label: 'Edge', color: 'var(--chart-3)' },
+  Firefox: { label: 'Firefox', color: 'var(--chart-4)' },
+};
+
+function ChartComponent({ delay = 0 }) {
+  wait(delay);
   return (
-    <div className="mb-2 rounded border p-4">
-      <b>Analytics</b>：流量與活躍用戶
-      <ChartContainer
-        config={analyticsConfig}
-        className="mt-2"
-      >
-        <BarChart data={analyticsData} height={220}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="date"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <YAxis
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <Bar
-            dataKey="visitors"
-            fill="hsl(var(--chart-1))"
-            radius={[4, 4, 0, 0]}
-          />
-          <Bar
-            dataKey="active"
-            fill="hsl(var(--chart-2))"
-            radius={[4, 4, 0, 0]}
-          />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          <ChartLegend content={<ChartLegendContent />} />
-        </BarChart>
-      </ChartContainer>
-    </div>
+    <Card className="grow">
+      <CardHeader>
+        <h3 className="text-xl font-bold">瀏覽器分布</h3>
+      </CardHeader>
+
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <PieChart>
+            <ChartTooltip
+              content={<ChartTooltipContent />}
+            />
+
+            <Pie
+              data={chartData}
+              dataKey="users"
+              nameKey="name"
+              label
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={entry.name} fill={entry.fill} />
+              ))}
+            </Pie>
+
+            <ChartLegend content={<ChartLegendContent />} />
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
 
-function ComplexChartComponent() {
+const barChartConfig = {
+  visitors: {
+    label: '訪客數',
+    color: 'var(--chart-1)',
+  },
+  active: {
+    label: '活躍用戶',
+    color: 'var(--chart-2)',
+  },
+};
+
+function BarChartComponent({ delay = 0 }) {
+  wait(delay);
   return (
-    <div className="mb-2 rounded border p-4">
-      <b>瀏覽器分布</b>：用戶來源
-      <ChartContainer config={chartConfig} className="mt-2">
-        <BarChart data={chartData} height={220}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="name"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <YAxis
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-          />
-          <Bar
-            dataKey="users"
-            radius={[4, 4, 0, 0]}
-            fill={({ payload }) => payload.fill}
-            isAnimationActive={false}
-          />
-          <ChartTooltip
-            content={
-              <ChartTooltipContent
-                labelKey="users"
-                nameKey="name"
-              />
-            }
-          />
-          <ChartLegend
-            content={<ChartLegendContent nameKey="name" />}
-          />
-        </BarChart>
-      </ChartContainer>
-    </div>
+    <Card className="grow">
+      <CardHeader>
+        <h3 className="text-xl font-bold">
+          每日訪客橫條圖
+        </h3>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={barChartConfig}>
+          <BarChart
+            data={analyticsData}
+            width={500}
+            height={300}
+          >
+            <ChartTooltip
+              content={<ChartTooltipContent />}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+
+            <XAxis
+              dataKey="date"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <Bar dataKey="visitors" fill="var(--chart-2)" />
+            <Bar dataKey="active" fill="var(--chart-5)" />
+            <ChartLegend content={<ChartLegendContent />} />
+          </BarChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
 
-// ✅ 狀態下移（效能較佳）
-function DetailsToggle() {
-  const [isDetailsVisible, setIsDetailsVisible] =
-    useState(false);
+const areaChartConfig = {
+  visitors: { label: '訪客數', color: 'var(--chart-4)' },
+  active: { label: '活躍用戶', color: 'var(--chart-5)' },
+};
+
+function AreaChartComponent({ delay = 0 }) {
+  wait(delay);
   return (
-    <>
-      <button
-        className="mb-2 rounded bg-gray-100 px-3 py-1 hover:bg-gray-200"
-        onClick={() => setIsDetailsVisible(true)}
-      >
-        顯示詳細資料
-      </button>
-      {isDetailsVisible && (
-        <UserDetails
-          onHide={() => setIsDetailsVisible(false)}
-        />
-      )}
-    </>
+    <Card className="grow">
+      <CardHeader>
+        <h3 className="text-xl font-bold">
+          活躍用戶面積圖
+        </h3>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={areaChartConfig}>
+          <AreaChart
+            data={analyticsData}
+            width={500}
+            height={300}
+          >
+            <ChartTooltip
+              content={<ChartTooltipContent />}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="date"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <Area
+              type="monotone"
+              dataKey="active"
+              strokeWidth={2}
+            />
+            <Area
+              type="monotone"
+              dataKey="visitors"
+              strokeWidth={2}
+            />
+            <ChartLegend content={<ChartLegendContent />} />
+          </AreaChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
 
-function UserProfileGood() {
-  return (
-    <div className="rounded-lg border p-6 shadow">
-      <h2 className="mb-2 text-xl font-bold">
-        {user.name}{' '}
-        <span className="text-xs text-gray-400">
-          (Good Example)
-        </span>
-      </h2>
-      <DetailsToggle />
-      <HeavyAnalyticsComponent />
-      <ComplexChartComponent />
-    </div>
-  );
-}
+const DELAY = 100;
 
 export default function Page() {
   const [isDetailsVisible, setIsDetailsVisible] =
     useState(false);
 
   return (
-    <div className="mb-8 rounded-lg border bg-white p-6 shadow">
-      <h2 className="mb-2 text-xl font-bold">
-        {user.name}{' '}
-        <span className="text-xs text-gray-400">
-          (Bad Example)
-        </span>
-      </h2>
-      <button
-        className="mb-2 rounded bg-gray-100 px-3 py-1 hover:bg-gray-200"
-        onClick={() => setIsDetailsVisible((v) => !v)}
-      >
-        {isDetailsVisible ? '隱藏詳細資料' : '顯示詳細資料'}
-      </button>
-      {isDetailsVisible && (
-        <UserDetails
-          onHide={() => setIsDetailsVisible(false)}
-        />
-      )}
+    <>
+      <header className="mb-8 flex items-center">
+        <h1 className="mb-2 text-4xl font-bold">
+          {`Hello ${user.name} `}
+        </h1>
+        <Button
+          onClick={() => setIsDetailsVisible((v) => !v)}
+          variant="link"
+          className="text-muted-foreground"
+        >
+          {isDetailsVisible
+            ? '隱藏詳細資料'
+            : '顯示詳細資料'}
+        </Button>
+        {isDetailsVisible && (
+          <UserDetails
+            onHide={() => setIsDetailsVisible(false)}
+          />
+        )}
+      </header>
 
-      <HeavyAnalyticsComponent />
-      <ComplexChartComponent />
-    </div>
+      <section className="flex gap-4">
+        <AnalyticsComponent delay={DELAY} />
+        <ChartComponent delay={DELAY} />
+      </section>
+
+      <section className="mt-8 flex flex-col gap-4">
+        <BarChartComponent delay={DELAY} />
+        <AreaChartComponent delay={DELAY} />
+      </section>
+    </>
   );
 }
