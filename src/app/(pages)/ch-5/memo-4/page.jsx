@@ -6,25 +6,24 @@ import { Button } from '@/components/ui/button';
 export default function Page() {
   const [count, setCount] = useState(0);
 
-  console.log('parent re-render', count);
-
   return (
     <div>
       <Button onClick={() => setCount(count + 1)}>
         Click me
       </Button>
-
-      <MemoChild data={1} />
+      <p>count: {count}</p>
+      <MemoChild>
+        <p>Child</p>
+      </MemoChild>
     </div>
   );
 }
 
-function Child({ data }) {
-  console.log('child re-render', data);
-
+function Child({ children }) {
+  console.log('child render');
   return (
     <div className="bg-muted mt-4 rounded p-4">
-      Memo Child
+      {children}
     </div>
   );
 }

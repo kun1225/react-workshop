@@ -18,12 +18,12 @@ export default function Page() {
 
       <p>count: {count}</p>
 
-      <MemoizedChild onEvent={someEvent} />
+      <MemoChild onEvent={someEvent} />
     </div>
   );
 }
 
-const MemoizedChild = memo(function Child({ onEvent }) {
+const MemoChild = memo(function Child({ onEvent }) {
   console.log('Child re-render');
 
   return <p>Memo Child</p>;

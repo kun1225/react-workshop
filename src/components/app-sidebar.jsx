@@ -184,6 +184,26 @@ const chapters = [
             icon: FileText,
             href: '/ch-5/memo-1',
           },
+          {
+            label: 'memo-2',
+            icon: FileText,
+            href: '/ch-5/memo-2',
+          },
+          {
+            label: 'memo-3',
+            icon: FileText,
+            href: '/ch-5/memo-3',
+          },
+          {
+            label: 'memo-4',
+            icon: FileText,
+            href: '/ch-5/memo-4',
+          },
+          {
+            label: 'memo-5',
+            icon: FileText,
+            href: '/ch-5/memo-5',
+          },
         ],
       },
       {
