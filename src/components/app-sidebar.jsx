@@ -139,7 +139,7 @@ const chapters = [
         ],
       },
       {
-        label: '效能優化',
+        label: '5-2 內容上移',
         icon: Book,
         pages: [
           {
@@ -147,15 +147,53 @@ const chapters = [
             icon: FileText,
             href: '/ch-5/content-lifting',
           },
+        ],
+      },
+      {
+        label: '5-3 Hook 記憶化',
+        icon: Book,
+        pages: [
+          {
+            label: 'Primitive Reference',
+            icon: FileText,
+            href: '/ch-5/primitive-reference',
+          },
+          {
+            label: 'Primitive Reference - memo',
+            icon: FileText,
+            href: '/ch-5/primitive-reference-memo',
+          },
+          {
+            label: "don't need useMemo",
+            icon: FileText,
+            href: '/ch-5/dont-need-useMemo',
+          },
+          {
+            label: 'memo error',
+            icon: FileText,
+            href: '/ch-5/memo-error',
+          },
+        ],
+      },
+      {
+        label: '5-4 React.memo',
+        icon: Book,
+        pages: [
+          {
+            label: 'memo-1',
+            icon: FileText,
+            href: '/ch-5/memo-1',
+          },
+        ],
+      },
+      {
+        label: '5-5 Context',
+        icon: Book,
+        pages: [
           {
             label: 'Context Problem',
             icon: FileText,
             href: '/ch-5/context-problem',
-          },
-          {
-            label: 'State Down',
-            icon: FileText,
-            href: '/ch-5/state-down',
           },
         ],
       },
