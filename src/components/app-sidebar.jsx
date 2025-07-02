@@ -146,6 +146,11 @@ const chapters = [
             icon: FileText,
             href: '/ch-3/does-prop-render',
           },
+          {
+            label: 'Context',
+            icon: FileText,
+            href: '/ch-3/context',
+          },
         ],
       },
     ],
