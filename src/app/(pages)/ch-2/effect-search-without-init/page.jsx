@@ -66,15 +66,6 @@ export default function Page() {
     return () => clearTimeout(searchTimeout);
   }, [search]);
 
-  // 🔴 不好的寫法，會導致多餘的 re-render
-  useEffect(() => {
-    if (isOpen) {
-      setSearch('');
-      setResults([]);
-      setHasSearched(false);
-    }
-  }, [isOpen]);
-
   const handleOpenChange = (open) => {
     setIsOpen(open);
   };
@@ -88,6 +79,8 @@ export default function Page() {
         <p className="text-muted-foreground mb-8">
           點擊下方按鈕開啟搜尋功能，尋找你感興趣的文章。
         </p>
+
+        <SlowComponent />
 
         <Sheet
           open={isOpen}

@@ -15,15 +15,16 @@ export default function Page() {
   const handleSubmit = (formData) => {
     // 使用 formData 來抓取資料
     const data = Object.fromEntries(formData);
+    console.log(formData.keys());
     toast.success(
-      <pre className="p-4 bg-muted rounded-md">
+      <pre className="bg-muted rounded-md p-4">
         {JSON.stringify(data, null, 2)}
       </pre>,
     );
   };
 
   return (
-    <div className="w-2xl mx-auto space-y-8">
+    <div className="mx-auto w-2xl space-y-8">
       <header className="text-center">
         <h1 className="text-3xl font-bold">
           處理表單輸入 更好的寫法
@@ -37,7 +38,7 @@ export default function Page() {
         <CardContent>
           {/* 將函數傳給 function */}
           <form action={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="name">姓名</Label>
                 <Input
@@ -89,7 +90,7 @@ export default function Page() {
                 placeholder="如有特殊需求請填寫"
               />
             </div>
-            <div className="flex justify-end pt-2 space-x-2">
+            <div className="flex justify-end space-x-2 pt-2">
               <Button type="reset" variant="outline">
                 重設表單
               </Button>

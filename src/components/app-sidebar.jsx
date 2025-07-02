@@ -19,6 +19,23 @@ import { Book, Folder, FileText } from 'lucide-react';
 
 const chapters = [
   {
+    label: 'Ch 1: 基本概念',
+    icon: Folder,
+    sections: [
+      {
+        label: 'Ch 1-1: 基本概念',
+        icon: Book,
+        pages: [
+          {
+            label: 'Re-render',
+            icon: FileText,
+            href: '/ch-1/re-render',
+          },
+        ],
+      },
+    ],
+  },
+  {
     label: 'Ch 2: State 與 Effect',
     icon: Folder,
     sections: [
@@ -68,6 +85,16 @@ const chapters = [
         icon: Book,
         pages: [
           {
+            label: 'Effect Timing',
+            icon: FileText,
+            href: '/ch-2/effect-timing',
+          },
+          {
+            label: 'Effect Search without init',
+            icon: FileText,
+            href: '/ch-2/effect-search-without-init',
+          },
+          {
             label: 'Effect Search 錯誤示範',
             icon: FileText,
             href: '/ch-2/effect-search-error',
@@ -113,6 +140,11 @@ const chapters = [
             label: 'State 設為相同值時不會 re-render',
             icon: FileText,
             href: '/ch-3/re-render-with-same-value',
+          },
+          {
+            label: 'Does Prop Render',
+            icon: FileText,
+            href: '/ch-3/does-prop-render',
           },
         ],
       },
