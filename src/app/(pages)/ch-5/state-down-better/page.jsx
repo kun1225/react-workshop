@@ -1,4 +1,5 @@
 'use client';
+import { onRender } from 'react-scan';
 import { useState } from 'react';
 import { wait } from '@/lib/utils';
 
@@ -296,7 +297,7 @@ function AreaChartComponent({ delay = 0 }) {
   );
 }
 
-function DetailsToggle() {
+export function DetailsToggle() {
   const [isDetailsVisible, setIsDetailsVisible] =
     useState(false);
   return (

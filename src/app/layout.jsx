@@ -1,3 +1,4 @@
+import { ReactScan } from '@/components/react-scan';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import {
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
           src="//unpkg.com/react-scan/dist/auto.global.js"
         /> */}
       </head>
+      <ReactScan />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
