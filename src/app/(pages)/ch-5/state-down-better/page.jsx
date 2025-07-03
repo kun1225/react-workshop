@@ -1,5 +1,5 @@
 'use client';
-import { onRender } from 'react-scan';
+
 import { useState } from 'react';
 import { wait } from '@/lib/utils';
 

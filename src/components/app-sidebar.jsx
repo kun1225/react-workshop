@@ -156,6 +156,28 @@ const chapters = [
     ],
   },
   {
+    label: 'Ch 4: 觀察 re-render',
+    icon: Folder,
+    sections: [
+      {
+        label: 'Ch 4-1: 觀察 re-render',
+        icon: Book,
+        pages: [
+          {
+            label: '二分除錯法',
+            icon: FileText,
+            href: '/ch-4/binary-debugging',
+          },
+          {
+            label: 'Developer Tool',
+            icon: FileText,
+            href: '/ch-4/developer-tool',
+          },
+        ],
+      },
+    ],
+  },
+  {
     label: 'Ch 5: 效能優化',
     icon: Folder,
     sections: [
