@@ -274,6 +274,11 @@ const chapters = [
             icon: FileText,
             href: '/ch-5/context-problem',
           },
+          {
+            label: 'Context Menu',
+            icon: FileText,
+            href: '/ch-5/context-menu',
+          },
         ],
       },
     ],
