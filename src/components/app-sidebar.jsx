@@ -206,6 +206,11 @@ const chapters = [
             icon: FileText,
             href: '/ch-5/content-lifting',
           },
+          {
+            label: 'interactive-background',
+            icon: FileText,
+            href: '/ch-5/interactive-background',
+          },
         ],
       },
       {

@@ -1,9 +1,27 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import {
+  useState,
+  useRef,
+  useEffect,
+  Children,
+} from 'react';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { wait } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { useTheme } from 'next-themes';
+import {
+  Share2,
+  FileDown,
+  Plus,
+  RefreshCw,
+  Maximize,
+  Minimize,
+  Moon,
+  Sun,
+} from 'lucide-react';
 
 export default function Page() {
   return (
@@ -277,6 +295,7 @@ function FloatingBarControl({ children }) {
   const containerRef = useRef(null);
   const [activeSection, setActiveSection] = useState('');
   const [isBarVisible, setIsBarVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -300,6 +319,14 @@ function FloatingBarControl({ children }) {
       if (activeSection !== currentSectionId) {
         setActiveSection(currentSectionId);
       }
+
+      // Calculate scroll progress
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+      const maxScroll = scrollHeight - clientHeight;
+      const currentProgress =
+        maxScroll > 0 ? scrollTop / maxScroll : 0;
+      setScrollProgress(currentProgress);
     };
 
     window.addEventListener('scroll', handleScroll, {
@@ -318,28 +345,149 @@ function FloatingBarControl({ children }) {
       <FloatingBar
         isVisible={isBarVisible}
         currentSection={activeSection}
+        scrollProgress={scrollProgress}
       />
     </div>
   );
 }
 
-function FloatingBar({ isVisible, currentSection }) {
+function FloatingBar({
+  isVisible,
+  currentSection,
+  scrollProgress,
+}) {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   console.log(
     `FloatingBar re-rendering. Section: ${currentSection}`,
   );
+
+  const sections = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'charts', label: 'Analytics' },
+    { id: 'tables', label: 'Projects' },
+  ];
+
+  const handleScrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }
+  };
+
+  // 監聽 ESC 鍵退出全螢幕的事件
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener(
+      'fullscreenchange',
+      handleFullscreenChange,
+    );
+    return () =>
+      document.removeEventListener(
+        'fullscreenchange',
+        handleFullscreenChange,
+      );
+  }, []);
+
   return (
     <div
       className={cn(
-        'fixed bottom-8 left-1/2 z-50 -translate-x-1/2 rounded-full bg-neutral-900 px-6 py-3 text-sm text-white shadow-lg transition-transform duration-300 ease-in-out',
+        'bg-background/80 fixed bottom-8 left-1/2 z-50 w-auto -translate-x-1/2 overflow-hidden rounded-full border text-sm shadow-lg backdrop-blur-sm transition-transform duration-300 ease-in-out',
         isVisible ? 'translate-y-0' : 'translate-y-24',
       )}
     >
-      <p className="capitalize">
-        Active Section:{' '}
-        <span className="font-bold">
-          {currentSection || 'None'}
-        </span>
-      </p>
+      <div className="flex h-14 items-center gap-2 p-2">
+        {/* 1. 導覽按鈕 */}
+        <div className="flex items-center gap-2">
+          {sections.map((section) => (
+            <Button
+              key={section.id}
+              variant={
+                currentSection === section.id
+                  ? 'secondary'
+                  : 'ghost'
+              }
+              size="sm"
+              className="rounded-full"
+              onClick={() => handleScrollTo(section.id)}
+            >
+              {section.label}
+            </Button>
+          ))}
+        </div>
+
+        <Separator orientation="vertical" className="h-6" />
+
+        {/* 2. 畫面與資料控制按鈕 */}
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+            onClick={() => console.log('Refresh clicked!')}
+          >
+            <RefreshCw className="h-4 w-4" />
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+            onClick={toggleFullscreen}
+          >
+            {isFullscreen ? (
+              <Minimize className="h-4 w-4" />
+            ) : (
+              <Maximize className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
+
+        <Separator orientation="vertical" className="h-6" />
+
+        {/* 3. 主要操作按鈕 */}
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+          >
+            <Share2 className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+          >
+            <FileDown className="h-4 w-4" />
+          </Button>
+          <Button size="icon" className="rounded-full">
+            <Plus className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Scroll Progress Bar */}
+      <div className="bg-primary/20 absolute bottom-0 left-0 h-1 w-full">
+        <div
+          className="bg-primary h-full w-full origin-left transition-transform duration-150 ease-linear"
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
+      </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from '@/components/ui/chart';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   PieChart,
@@ -243,6 +244,84 @@ function BarChartComponent({ delay = 0 }) {
   );
 }
 
+function TableComponent({ delay = 0 }) {
+  wait(delay);
+
+  const tableData = Array.from({ length: 100 }, (_, i) => ({
+    id: `prj_${'a' + (i * 7).toString(16).padStart(5, '0')}`,
+    name: `project-${i + 1}`,
+    status: ['Production', 'Building', 'Error', 'Queued'][
+      i % 4
+    ],
+    lastUpdated: `${i + 1}h ago`,
+    domain: `app-${i + 1}.vercel.app`,
+  }));
+
+  const statusColors = {
+    Production: 'green',
+    Building: 'yellow',
+    Error: 'red',
+    Queued: 'gray',
+  };
+
+  return (
+    <Card id="tables">
+      <CardHeader>
+        <h1 className="text-3xl font-bold">專案列表</h1>
+      </CardHeader>
+      <CardContent>
+        <div className="max-h-[85vh] overflow-y-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="sticky top-0 z-10 border-b bg-gray-50/80 backdrop-blur-sm">
+              <tr>
+                <th className="p-4 font-semibold">
+                  Project Name
+                </th>
+                <th className="p-4 font-semibold">
+                  Status
+                </th>
+                <th className="p-4 font-semibold">
+                  Last Updated
+                </th>
+                <th className="p-4 font-semibold">
+                  Domain
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((row) => (
+                <tr key={row.id} className="border-b">
+                  <td className="p-4 font-mono">
+                    {row.name}
+                  </td>
+                  <td className="p-4">
+                    <Badge
+                      variant={statusColors[row.status]}
+                    >
+                      {row.status}
+                    </Badge>
+                  </td>
+                  <td className="p-4 text-gray-500">
+                    {row.lastUpdated}
+                  </td>
+                  <td className="p-4">
+                    <a
+                      href="#"
+                      className="text-blue-600 hover:underline"
+                    >
+                      {row.domain}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 const areaChartConfig = {
   visitors: { label: '訪客數', color: 'var(--chart-4)' },
   active: { label: '活躍用戶', color: 'var(--chart-5)' },
@@ -338,6 +417,7 @@ export default function Page() {
       <section className="mt-8 flex flex-col gap-4">
         <BarChartComponent delay={DELAY} />
         <AreaChartComponent delay={DELAY} />
+        <TableComponent delay={DELAY} />
       </section>
     </>
   );
