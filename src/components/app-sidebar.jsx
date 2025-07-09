@@ -40,6 +40,17 @@ const chapters = [
     icon: Folder,
     sections: [
       {
+        label: 'Ch 2-1',
+        icon: Book,
+        pages: [
+          {
+            label: 'Countdown',
+            href: '/ch-2/countdown',
+            icon: FileText,
+          },
+        ],
+      },
+      {
         label: 'Ch 2-2: 如何正確管理 State',
         icon: Book,
         pages: [
@@ -207,9 +218,19 @@ const chapters = [
             href: '/ch-5/content-lifting',
           },
           {
-            label: 'interactive-background',
+            label: 'State Down Floating Bar Error',
             icon: FileText,
-            href: '/ch-5/interactive-background',
+            href: '/ch-5/state-down-floating-bar-error',
+          },
+          {
+            label: 'State Down Floating Bar',
+            icon: FileText,
+            href: '/ch-5/state-down-floating-bar',
+          },
+          {
+            label: 'Content Lifting Demo',
+            icon: FileText,
+            href: '/ch-5/content-lifting-demo',
           },
         ],
       },
@@ -283,6 +304,23 @@ const chapters = [
             label: 'Context Menu',
             icon: FileText,
             href: '/ch-5/context-menu',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Ch 6: 效能優化',
+    icon: Folder,
+    sections: [
+      {
+        label: 'Ch 6-1: 效能優化',
+        icon: Book,
+        pages: [
+          {
+            label: 'Demo 1',
+            icon: FileText,
+            href: '/ch-6/demo-1',
           },
         ],
       },

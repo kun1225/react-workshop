@@ -19,7 +19,7 @@ export default function Page() {
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success(
-      <pre className="p-4 bg-muted rounded-md">
+      <pre className="bg-muted rounded-md p-4">
         {JSON.stringify({ email, eventName }, null, 2)}
       </pre>,
     );
@@ -31,7 +31,7 @@ export default function Page() {
   };
 
   return (
-    <div className="w-2xl mx-auto space-y-8">
+    <div className="mx-auto w-2xl space-y-8">
       <header className="text-center">
         <h1 className="text-3xl font-bold">
           處理表單輸入 錯誤示範 1
@@ -47,7 +47,7 @@ export default function Page() {
             onSubmit={handleSubmit}
             className="space-y-6"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="email">電子郵件</Label>
                 <Input
@@ -74,7 +74,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="flex justify-end pt-2 space-x-2">
+            <div className="flex justify-end space-x-2 pt-2">
               <Button
                 type="button"
                 variant="outline"
@@ -93,7 +93,7 @@ export default function Page() {
           <CardTitle>目前表單資料</CardTitle>
         </CardHeader>
         <CardContent>
-          <pre className="p-4 bg-muted rounded-md overflow-x-auto">
+          <pre className="bg-muted overflow-x-auto rounded-md p-4">
             {JSON.stringify({ email, eventName }, null, 2)}
           </pre>
         </CardContent>
