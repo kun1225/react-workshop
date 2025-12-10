@@ -193,7 +193,7 @@ const chapters = [
     icon: Folder,
     sections: [
       {
-        label: '狀態下移',
+        label: '5-1 狀態下移',
         icon: Book,
         pages: [
           {
@@ -235,7 +235,33 @@ const chapters = [
         ],
       },
       {
-        label: '5-3 Hook 記憶化',
+        label: '5-3 狀態保留',
+        icon: Book,
+        pages: [
+          {
+            label: 'Activity Problem 1',
+            icon: FileText,
+            href: '/ch-5/activity-problem-1',
+          },
+          {
+            label: 'Activity Problem 2',
+            icon: FileText,
+            href: '/ch-5/activity-problem-2',
+          },
+          {
+            label: 'Activity Problem 3',
+            icon: FileText,
+            href: '/ch-5/activity-problem-3',
+          },
+          {
+            label: 'Activity Better',
+            icon: FileText,
+            href: '/ch-5/activity-better',
+          },
+        ],
+      },
+      {
+        label: '5-4 Hook 記憶化',
         icon: Book,
         pages: [
           {
@@ -261,7 +287,7 @@ const chapters = [
         ],
       },
       {
-        label: '5-4 React.memo',
+        label: '5-5 React.memo',
         icon: Book,
         pages: [
           {
@@ -292,7 +318,7 @@ const chapters = [
         ],
       },
       {
-        label: '5-5 Context',
+        label: '5-6 Context',
         icon: Book,
         pages: [
           {
@@ -304,6 +330,17 @@ const chapters = [
             label: 'Context Menu',
             icon: FileText,
             href: '/ch-5/context-menu',
+          },
+        ],
+      },
+      {
+        label: '5-7 Compiler',
+        icon: Book,
+        pages: [
+          {
+            label: 'Compiler 1',
+            icon: FileText,
+            href: '/ch-5/compiler-1',
           },
         ],
       },
@@ -342,32 +379,21 @@ export function AppSidebar() {
           collapsible="true"
           defaultValue={chapters.map(({ label }) => label)}
         >
-          {chapters.map(
-            ({ label, icon: Icon, sections }) => (
-              <AccordionItem
-                key={label}
-                value={label}
-                className="border-none"
-              >
-                <SidebarGroup>
-                  <AccordionTrigger>
-                    <SidebarChapterLabel
-                      label={label}
-                      icon={Icon}
-                    />
-                  </AccordionTrigger>
+          {chapters.map(({ label, icon: Icon, sections }) => (
+            <AccordionItem key={label} value={label} className="border-none">
+              <SidebarGroup>
+                <AccordionTrigger>
+                  <SidebarChapterLabel label={label} icon={Icon} />
+                </AccordionTrigger>
 
-                  <AccordionContent>
-                    <SidebarGroupContent>
-                      <SidebarSections
-                        sections={sections}
-                      />
-                    </SidebarGroupContent>
-                  </AccordionContent>
-                </SidebarGroup>
-              </AccordionItem>
-            ),
-          )}
+                <AccordionContent>
+                  <SidebarGroupContent>
+                    <SidebarSections sections={sections} />
+                  </SidebarGroupContent>
+                </AccordionContent>
+              </SidebarGroup>
+            </AccordionItem>
+          ))}
         </Accordion>
       </SidebarContent>
     </Sidebar>
@@ -387,11 +413,7 @@ function SidebarSections({ sections }) {
   return (
     <Accordion type="multiple" collapsible="true">
       {sections.map(({ label, icon: Icon, pages }) => (
-        <AccordionItem
-          value={label}
-          key={label}
-          className="border-none"
-        >
+        <AccordionItem value={label} key={label} className="border-none">
           <SidebarGroup>
             <AccordionTrigger className="h-4">
               <SidebarGroupLabel>
@@ -414,11 +436,7 @@ function SidebarSections({ sections }) {
 
 function SidebarPages({ pages }) {
   return pages.map(({ label, href, icon: Icon }) => (
-    <SidebarMenuButton
-      asChild
-      key={label}
-      className="text-xs"
-    >
+    <SidebarMenuButton asChild key={label} className="text-xs">
       <Link href={href} className="flex items-center">
         <Icon className="h-4 w-4" />
         <span>{label}</span>
