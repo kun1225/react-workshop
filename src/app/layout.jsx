@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
           src="//unpkg.com/react-scan/dist/auto.global.js"
         /> */}
       </head>
-      <ReactScan />
+      {/* <ReactScan /> */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

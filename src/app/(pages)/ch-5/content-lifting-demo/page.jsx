@@ -4,26 +4,26 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
 export default function Page() {
-  const childrenContent = <Child />;
+  const ParentContent = <ParentContentInner />;
 
-  return <Parent>{childrenContent}</Parent>;
+  return <Child>{ParentContent}</Child>;
 }
 
-function Child() {
+function ParentContentInner() {
+  console.log('Parent Re-render');
+
+  return <p>我是 Parent Content</p>;
+}
+
+function Child({ children }) {
   console.log('Child re-render');
-  return <div>Child</div>;
-}
-
-function Parent({ children }) {
-  console.log('Parent re-render');
-
   const [count, setCount] = useState(0);
 
   return (
     <div>
-      <Button onClick={() => setCount(count + 1)}>
-        {`count: ${count}`}
-      </Button>
+      <Button
+        onClick={() => setCount(count + 1)}
+      >{`我是 Child 組件: ${count}`}</Button>
       {children}
     </div>
   );
