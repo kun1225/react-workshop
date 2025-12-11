@@ -213,19 +213,14 @@ const chapters = [
         icon: Book,
         pages: [
           {
-            label: 'Content Lifting',
+            label: 'Content Lifting 錯誤示範',
             icon: FileText,
-            href: '/ch-5/content-lifting',
+            href: '/ch-5/content-lifting-wrong',
           },
           {
-            label: 'State Down Floating Bar Error',
+            label: 'Content Lifting 更好的寫法',
             icon: FileText,
-            href: '/ch-5/state-down-floating-bar-error',
-          },
-          {
-            label: 'State Down Floating Bar',
-            icon: FileText,
-            href: '/ch-5/state-down-floating-bar',
+            href: '/ch-5/content-lifting-better',
           },
           {
             label: 'Content Lifting Demo',
@@ -341,6 +336,36 @@ const chapters = [
             label: 'Compiler 1',
             icon: FileText,
             href: '/ch-5/compiler-1',
+          },
+          {
+            label: 'Compiler 狀態下移',
+            icon: FileText,
+            href: '/ch-5/compiler-state-down',
+          },
+          {
+            label: 'Compiler 內容上移',
+            icon: FileText,
+            href: '/ch-5/compiler-content-lifting',
+          },
+          {
+            label: 'Compiler Primitive Reference',
+            icon: FileText,
+            href: '/ch-5/compiler-primitive-reference',
+          },
+          {
+            label: 'inline function',
+            icon: FileText,
+            href: '/ch-5/compiler-memo-with-inline-function',
+          },
+          {
+            label: 'compiler memo children',
+            icon: FileText,
+            href: '/ch-5/compiler-memo-children',
+          },
+          {
+            label: 'compiler context',
+            icon: FileText,
+            href: '/ch-5/compiler-context',
           },
         ],
       },

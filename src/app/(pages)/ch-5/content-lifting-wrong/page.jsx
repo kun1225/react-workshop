@@ -58,13 +58,11 @@ export default function Page() {
       const showBarPosition = 200;
       setIsBarVisible(window.scrollY > showBarPosition);
 
-      const sections =
-        containerRef.current.querySelectorAll('section');
+      const sections = containerRef.current.querySelectorAll('section');
 
       let currentSectionId = '';
       sections.forEach((section) => {
-        const sectionTop =
-          section.getBoundingClientRect().top;
+        const sectionTop = section.getBoundingClientRect().top;
         if (sectionTop < window.innerHeight / 2) {
           currentSectionId = section.id;
         }
@@ -78,8 +76,7 @@ export default function Page() {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
       const maxScroll = scrollHeight - clientHeight;
-      const currentProgress =
-        maxScroll > 0 ? scrollTop / maxScroll : 0;
+      const currentProgress = maxScroll > 0 ? scrollTop / maxScroll : 0;
       setScrollProgress(currentProgress);
     };
 
@@ -104,22 +101,13 @@ export default function Page() {
         <AnalyticsComponent delay={DELAY} />
         <ChartComponent delay={DELAY} />
       </section>
-      <section
-        id="bar-chart"
-        className="mt-8 flex flex-col gap-4"
-      >
+      <section id="bar-chart" className="mt-8 flex flex-col gap-4">
         <BarChartComponent delay={DELAY} />
       </section>
-      <section
-        id="area-chart"
-        className="mt-8 flex flex-col gap-4"
-      >
+      <section id="area-chart" className="mt-8 flex flex-col gap-4">
         <AreaChartComponent delay={DELAY} />
       </section>
-      <section
-        id="tables"
-        className="mt-8 flex flex-col gap-4"
-      >
+      <section id="tables" className="mt-8 flex flex-col gap-4">
         <TableComponent delay={DELAY} />
       </section>
 
@@ -144,9 +132,7 @@ function DynamicHeader({ currentSection }) {
   };
   return (
     <header className="bg-background/80 sticky top-0 z-50 -mx-8 mb-4 px-8 py-4 backdrop-blur-sm">
-      <h1 className="text-4xl font-bold">
-        {getSectionTitle(currentSection)}
-      </h1>
+      <h1 className="text-4xl font-bold">{getSectionTitle(currentSection)}</h1>
     </header>
   );
 }
@@ -164,9 +150,7 @@ function UserDetails({ onHide }) {
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/40">
       <Card className="w-xl">
         <CardHeader>
-          <h3 className="text-lg font-bold">
-            使用者詳細資料
-          </h3>
+          <h3 className="text-lg font-bold">使用者詳細資料</h3>
         </CardHeader>
         <CardContent>
           <ul>
@@ -182,11 +166,7 @@ function UserDetails({ onHide }) {
           </ul>
         </CardContent>
         <CardFooter>
-          <Button
-            className="ml-auto"
-            variant="secondary"
-            onClick={onHide}
-          >
+          <Button className="ml-auto" variant="secondary" onClick={onHide}>
             關閉
           </Button>
         </CardFooter>
@@ -196,8 +176,7 @@ function UserDetails({ onHide }) {
 }
 
 export function DetailsToggle() {
-  const [isDetailsVisible, setIsDetailsVisible] =
-    useState(false);
+  const [isDetailsVisible, setIsDetailsVisible] = useState(false);
   return (
     <>
       <Button
@@ -208,9 +187,7 @@ export function DetailsToggle() {
         {isDetailsVisible ? '隱藏詳細資料' : '顯示詳細資料'}
       </Button>
       {isDetailsVisible && (
-        <UserDetails
-          onHide={() => setIsDetailsVisible(false)}
-        />
+        <UserDetails onHide={() => setIsDetailsVisible(false)} />
       )}
     </>
   );
@@ -229,18 +206,9 @@ function AnalyticsComponent({ delay = 0 }) {
         <h3 className="text-xl font-bold">網站流量分析</h3>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={analyticsConfig}
-          className="bg-card"
-        >
-          <LineChart
-            data={analyticsData}
-            width={500}
-            height={300}
-          >
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-            />
+        <ChartContainer config={analyticsConfig} className="bg-card">
+          <LineChart data={analyticsData} width={500} height={300}>
+            <ChartTooltip content={<ChartTooltipContent />} />
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
@@ -248,11 +216,7 @@ function AnalyticsComponent({ delay = 0 }) {
               tickLine={false}
               axisLine={false}
             />
-            <YAxis
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-            />
+            <YAxis fontSize={12} tickLine={false} axisLine={false} />
             <Line
               type="monotone"
               dataKey="visitors"
@@ -292,15 +256,8 @@ function ChartComponent({ delay = 0 }) {
       <CardContent>
         <ChartContainer config={chartConfig}>
           <PieChart>
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-            />
-            <Pie
-              data={chartData}
-              dataKey="users"
-              nameKey="name"
-              label
-            >
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Pie data={chartData} dataKey="users" nameKey="name" label>
               {chartData.map((entry, index) => (
                 <Cell key={entry.name} fill={entry.fill} />
               ))}
@@ -323,20 +280,12 @@ function BarChartComponent({ delay = 0 }) {
   return (
     <Card className="grow">
       <CardHeader>
-        <h3 className="text-xl font-bold">
-          每日訪客橫條圖
-        </h3>
+        <h3 className="text-xl font-bold">每日訪客橫條圖</h3>
       </CardHeader>
       <CardContent>
         <ChartContainer config={barChartConfig}>
-          <BarChart
-            data={analyticsData}
-            width={500}
-            height={300}
-          >
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-            />
+          <BarChart data={analyticsData} width={500} height={300}>
+            <ChartTooltip content={<ChartTooltipContent />} />
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
@@ -344,11 +293,7 @@ function BarChartComponent({ delay = 0 }) {
               tickLine={false}
               axisLine={false}
             />
-            <YAxis
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-            />
+            <YAxis fontSize={12} tickLine={false} axisLine={false} />
             <Bar dataKey="visitors" fill="var(--chart-2)" />
             <Bar dataKey="active" fill="var(--chart-5)" />
             <ChartLegend content={<ChartLegendContent />} />
@@ -364,9 +309,7 @@ function TableComponent({ delay = 0 }) {
   const tableData = Array.from({ length: 100 }, (_, i) => ({
     id: `prj_${'a' + (i * 7).toString(16).padStart(5, '0')}`,
     name: `project-${i + 1}`,
-    status: ['Production', 'Building', 'Error', 'Queued'][
-      i % 4
-    ],
+    status: ['Production', 'Building', 'Error', 'Queued'][i % 4],
     lastUpdated: `${i + 1}h ago`,
     domain: `app-${i + 1}.vercel.app`,
   }));
@@ -385,35 +328,22 @@ function TableComponent({ delay = 0 }) {
         <table className="w-full text-left text-sm">
           <thead className="sticky top-0 z-10 border-b bg-gray-50/80 backdrop-blur-sm">
             <tr>
-              <th className="p-4 font-semibold">
-                Project Name
-              </th>
+              <th className="p-4 font-semibold">Project Name</th>
               <th className="p-4 font-semibold">Status</th>
-              <th className="p-4 font-semibold">
-                Last Updated
-              </th>
+              <th className="p-4 font-semibold">Last Updated</th>
               <th className="p-4 font-semibold">Domain</th>
             </tr>
           </thead>
           <tbody>
             {tableData.map((row) => (
               <tr key={row.id} className="border-b">
-                <td className="p-4 font-mono">
-                  {row.name}
-                </td>
+                <td className="p-4 font-mono">{row.name}</td>
                 <td className="p-4">
-                  <Badge variant={statusColors[row.status]}>
-                    {row.status}
-                  </Badge>
+                  <Badge variant={statusColors[row.status]}>{row.status}</Badge>
                 </td>
-                <td className="p-4 text-gray-500">
-                  {row.lastUpdated}
-                </td>
+                <td className="p-4 text-gray-500">{row.lastUpdated}</td>
                 <td className="p-4">
-                  <a
-                    href="#"
-                    className="text-blue-600 hover:underline"
-                  >
+                  <a href="#" className="text-blue-600 hover:underline">
                     {row.domain}
                   </a>
                 </td>
@@ -436,20 +366,12 @@ function AreaChartComponent({ delay = 0 }) {
   return (
     <Card className="grow">
       <CardHeader>
-        <h3 className="text-xl font-bold">
-          活躍用戶面積圖
-        </h3>
+        <h3 className="text-xl font-bold">活躍用戶面積圖</h3>
       </CardHeader>
       <CardContent>
         <ChartContainer config={areaChartConfig}>
-          <AreaChart
-            data={analyticsData}
-            width={500}
-            height={300}
-          >
-            <ChartTooltip
-              content={<ChartTooltipContent />}
-            />
+          <AreaChart data={analyticsData} width={500} height={300}>
+            <ChartTooltip content={<ChartTooltipContent />} />
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
@@ -457,21 +379,9 @@ function AreaChartComponent({ delay = 0 }) {
               tickLine={false}
               axisLine={false}
             />
-            <YAxis
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-            />
-            <Area
-              type="monotone"
-              dataKey="active"
-              strokeWidth={2}
-            />
-            <Area
-              type="monotone"
-              dataKey="visitors"
-              strokeWidth={2}
-            />
+            <YAxis fontSize={12} tickLine={false} axisLine={false} />
+            <Area type="monotone" dataKey="active" strokeWidth={2} />
+            <Area type="monotone" dataKey="visitors" strokeWidth={2} />
             <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>
         </ChartContainer>
@@ -492,12 +402,10 @@ function FloatingBarControl({ children }) {
       if (!containerRef.current) return;
       const showBarPosition = 200;
       setIsBarVisible(window.scrollY > showBarPosition);
-      const sections =
-        containerRef.current.querySelectorAll('section');
+      const sections = containerRef.current.querySelectorAll('section');
       let currentSectionId = '';
       sections.forEach((section) => {
-        const sectionTop =
-          section.getBoundingClientRect().top;
+        const sectionTop = section.getBoundingClientRect().top;
         if (sectionTop < window.innerHeight / 2) {
           currentSectionId = section.id;
         }
@@ -509,8 +417,7 @@ function FloatingBarControl({ children }) {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
       const maxScroll = scrollHeight - clientHeight;
-      const currentProgress =
-        maxScroll > 0 ? scrollTop / maxScroll : 0;
+      const currentProgress = maxScroll > 0 ? scrollTop / maxScroll : 0;
       setScrollProgress(currentProgress);
     };
     window.addEventListener('scroll', handleScroll, {
@@ -534,11 +441,7 @@ function FloatingBarControl({ children }) {
   );
 }
 
-function FloatingBar({
-  isVisible,
-  currentSection,
-  scrollProgress,
-}) {
+function FloatingBar({ isVisible, currentSection, scrollProgress }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const sections = [
     { id: 'analytics', label: '流量分析' },
@@ -568,15 +471,9 @@ function FloatingBar({
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
-    document.addEventListener(
-      'fullscreenchange',
-      handleFullscreenChange,
-    );
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
     return () =>
-      document.removeEventListener(
-        'fullscreenchange',
-        handleFullscreenChange,
-      );
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
   return (
     <div
@@ -591,11 +488,7 @@ function FloatingBar({
           {sections.map((section) => (
             <Button
               key={section.id}
-              variant={
-                currentSection === section.id
-                  ? 'secondary'
-                  : 'ghost'
-              }
+              variant={currentSection === section.id ? 'secondary' : 'ghost'}
               size="sm"
               className="rounded-full"
               onClick={() => handleScrollTo(section.id)}
@@ -631,18 +524,10 @@ function FloatingBar({
         <Separator orientation="vertical" className="h-6" />
         {/* 3. 主要操作按鈕 */}
         <div className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full"
-          >
+          <Button variant="ghost" size="icon" className="rounded-full">
             <Share2 className="h-4 w-4" />
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full"
-          >
+          <Button variant="ghost" size="icon" className="rounded-full">
             <FileDown className="h-4 w-4" />
           </Button>
           <Button size="icon" className="rounded-full">
